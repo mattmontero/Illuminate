@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sjsu.illuminate.illuminate.Fragments.MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/background"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/splashBackground" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="232dp"
+            app:srcCompat="@drawable/icon"
+            android:id="@+id/splashIcon"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="80sp"
+            android:textColor="#FFFFFF"/>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:text="Button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/splashButton"
+        android:layout_weight="0.04"
+        android:visibility="visible"
+        android:elevation="0dp"
+        android:textColor="@android:color/transparent"
+        android:background="@android:color/transparent" />
+
+</FrameLayout>
