@@ -1,6 +1,8 @@
 package sjsu.illuminate.illuminate.Fragments;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import sjsu.illuminate.illuminate.Activities.MainActivity;
 import sjsu.illuminate.illuminate.R;
@@ -72,6 +75,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         View view =  inflater.inflate(R.layout.fragment_main, container, false);
 
         splashButton = (Button) view.findViewById(R.id.splashButton);
+        TextView appName = (TextView) view.findViewById(R.id.appName);
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Frontage-Regular.otf");
+        appName.setTypeface(typeface);
 
         splashButton.setOnClickListener(new View.OnClickListener() {
             @Override

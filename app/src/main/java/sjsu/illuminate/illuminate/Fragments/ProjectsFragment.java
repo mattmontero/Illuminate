@@ -3,6 +3,7 @@ package sjsu.illuminate.illuminate.Fragments;
 import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 
 import pl.droidsonroids.gif.GifDrawable;
@@ -95,6 +98,8 @@ public class ProjectsFragment extends Fragment implements
         Log.d("onCreateView", "pattern layout");
         LinearLayout patternLinearLayout = (LinearLayout) view.findViewById(R.id.patternContainer);
 
+        Log.d("layoutparams", view.findViewById(R.id.fadeOff).getLayoutParams().toString());
+
         //Add GIF Drawables to LinearLayout
         view.findViewById(R.id.fadeOff).setOnLongClickListener(this);
         view.findViewById(R.id.fadeOn).setOnLongClickListener(this);
@@ -102,7 +107,12 @@ public class ProjectsFragment extends Fragment implements
         view.findViewById(R.id.spiralDown).setOnLongClickListener(this);
         view.findViewById(R.id.flash).setOnLongClickListener(this);
         view.findViewById(R.id.patternContainer).setOnDragListener(this);
-        view.findViewById(R.id.storyboardContainer).setOnDragListener(this);
+        view.findViewById(R.id.slot1).setOnDragListener(this);
+        view.findViewById(R.id.slot2).setOnDragListener(this);
+        view.findViewById(R.id.slot3).setOnDragListener(this);
+        view.findViewById(R.id.slot4).setOnDragListener(this);
+        view.findViewById(R.id.slot5).setOnDragListener(this);
+        view.findViewById(R.id.slot6).setOnDragListener(this);
         view.findViewById(R.id.projectBackground).setOnDragListener(this);
 
         // Inflate the layout for this fragment
@@ -162,47 +172,75 @@ public class ProjectsFragment extends Fragment implements
 
                 GifImageView oldDraggedView = (GifImageView) draggedView;
                 GifImageView cloneDraggedView = new GifImageView(getContext());
-
                 //Bitmap bitmap;
                 //oldDraggedView.buildDrawingCache();
                 //bitmap = oldDraggedView.getDrawingCache();
 
+                /*
                 switch (oldDraggedView.getId()) {
                     case R.id.spiralDown:
-                        cloneDraggedView.setBackground(getResources().getDrawable(R.drawable.spiraldown));
+                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.spiraldown));
                     case R.id.spiralUp:
-                        cloneDraggedView.setBackground(getResources().getDrawable(R.drawable.spiralup));
+                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.spiralup));
                     case R.id.fadeOn:
-                        cloneDraggedView.setBackground(getResources().getDrawable(R.drawable.fadeoff));
+                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.fadeon));
                     case R.id.fadeOff:
-                        cloneDraggedView.setBackground(getResources().getDrawable(R.drawable.fadeon));
+                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.fadeoff));
                     case R.id.flash:
-                        cloneDraggedView.setBackground(getResources().getDrawable(R.drawable.flash));
+                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.flash));
                 }
+                */
 
-                Log.d("old scaleX", Float.toString(oldDraggedView.getScaleX()));
-                Log.d("old scaleY", Float.toString(oldDraggedView.getScaleY()));
-
-                cloneDraggedView.setScaleX((float)0.25);
-                cloneDraggedView.setScaleY((float)0.5);
-
-
+                cloneDraggedView.setBackground(oldDraggedView.getBackground());
+                cloneDraggedView.setLayoutParams(oldDraggedView.getLayoutParams());
 
                 //cloneDraggedView.setImageBitmap(bitmap);
                 Log.d("clone","Complete");
 
                 LinearLayout storyboardLinearLayout = (LinearLayout) parentView.findViewById(R.id.storyboardContainer);
                 LinearLayout patternLinearLayout = (LinearLayout) parentView.findViewById(R.id.patternContainer);
+                RelativeLayout slot1 = (RelativeLayout) parentView.findViewById(R.id.slot1);
+                RelativeLayout slot2 = (RelativeLayout) parentView.findViewById(R.id.slot2);
+                RelativeLayout slot3 = (RelativeLayout) parentView.findViewById(R.id.slot3);
+                RelativeLayout slot4 = (RelativeLayout) parentView.findViewById(R.id.slot4);
+                RelativeLayout slot5 = (RelativeLayout) parentView.findViewById(R.id.slot5);
+                RelativeLayout slot6 = (RelativeLayout) parentView.findViewById(R.id.slot6);
 
 
                 //ViewGroup draggedImageViewParentLayout = (ViewGroup) draggedView.getParent();
                 switch (view.getId()) {
+                    /*
                     case R.id.storyboardContainer:
                         Log.d("Container", "storyboard");
                         //draggedImageViewParentLayout = (ViewGroup) draggedView.getParent();
                         //draggedImageViewParentLayout.removeView(draggedCopy);
                         storyboardLinearLayout.addView(cloneDraggedView);
 
+                        return true;
+                        */
+                    case R.id.slot1:
+                        slot1.removeAllViews();
+                        slot1.addView(cloneDraggedView);
+                        return true;
+                    case R.id.slot2:
+                        slot2.removeAllViews();
+                        slot2.addView(cloneDraggedView);
+                        return true;
+                    case R.id.slot3:
+                        slot3.removeAllViews();
+                        slot3.addView(cloneDraggedView);
+                        return true;
+                    case R.id.slot4:
+                        slot4.removeAllViews();
+                        slot4.addView(cloneDraggedView);
+                        return true;
+                    case R.id.slot5:
+                        slot5.removeAllViews();
+                        slot5.addView(cloneDraggedView);
+                        return true;
+                    case R.id.slot6:
+                        slot6.removeAllViews();
+                        slot6.addView(cloneDraggedView);
                         return true;
                     case R.id.patternContainer:
                         Log.d("Container", "pattern");
@@ -221,16 +259,15 @@ public class ProjectsFragment extends Fragment implements
     public boolean onLongClick(View view) {
         Log.d("Gesture", "onLongClick");
 
-
         //The icon has been touched
         // Create clip data holding the data of the MIMETYPE TEXT_PLAIN
         ClipData clipData = ClipData.newPlainText("","");
 
-        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder((ImageView) view);
+        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder((GifImageView) view);
         /*Start the drag - Contains the data to be dragged,
         * metadata for this data and callback for drawing shadow.*/
         //view.startDrag(clipData, shadowBuilder, (ImageView) view, 0);
-        view.startDragAndDrop(clipData, shadowBuilder, (ImageView) view, 0);
+        view.startDragAndDrop(clipData, shadowBuilder, (GifImageView) view, 0);
         //view.setVisibility(View.INVISIBLE);
 
         return true;
