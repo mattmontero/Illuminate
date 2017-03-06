@@ -54,6 +54,8 @@ public class ProjectsFragment extends Fragment implements
     private String mParam2;
 
     private ProjectsFragmentInteractionListener mListener;
+    RelativeLayout slot1, slot2, slot3, slot4, slot5, slot6;
+    LinearLayout patternLinearLayout;
 
     public ProjectsFragment() {
         // Required empty public constructor
@@ -96,7 +98,13 @@ public class ProjectsFragment extends Fragment implements
 
         //Create LinearLayout
         Log.d("onCreateView", "pattern layout");
-        LinearLayout patternLinearLayout = (LinearLayout) view.findViewById(R.id.patternContainer);
+        patternLinearLayout = (LinearLayout) view.findViewById(R.id.patternContainer);
+        slot1 = (RelativeLayout) view.findViewById(R.id.slot1);
+        slot2 = (RelativeLayout) view.findViewById(R.id.slot2);
+        slot3 = (RelativeLayout) view.findViewById(R.id.slot3);
+        slot4 = (RelativeLayout) view.findViewById(R.id.slot4);
+        slot5 = (RelativeLayout) view.findViewById(R.id.slot5);
+        slot6 = (RelativeLayout) view.findViewById(R.id.slot6);
 
         Log.d("layoutparams", view.findViewById(R.id.fadeOff).getLayoutParams().toString());
 
@@ -167,88 +175,51 @@ public class ProjectsFragment extends Fragment implements
             case DragEvent.ACTION_DROP:
                 Log.d("ACTION_DROP", "Dropped");
                 View parentView = (View) view.getParent();
-
+                //View being dragged
                 View draggedView = (View) dragEvent.getLocalState();
-
+                //Same view but now a GifImageView being dragged
                 GifImageView oldDraggedView = (GifImageView) draggedView;
+                //Creating new cloned image of what is being dragged
                 GifImageView cloneDraggedView = new GifImageView(getContext());
-                //Bitmap bitmap;
-                //oldDraggedView.buildDrawingCache();
-                //bitmap = oldDraggedView.getDrawingCache();
-
-                /*
-                switch (oldDraggedView.getId()) {
-                    case R.id.spiralDown:
-                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.spiraldown));
-                    case R.id.spiralUp:
-                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.spiralup));
-                    case R.id.fadeOn:
-                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.fadeon));
-                    case R.id.fadeOff:
-                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.fadeoff));
-                    case R.id.flash:
-                        cloneDraggedView.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.flash));
-                }
-                */
-
+                //set the copy background
                 cloneDraggedView.setBackground(oldDraggedView.getBackground());
+                //set the copy layoutparams
                 cloneDraggedView.setLayoutParams(oldDraggedView.getLayoutParams());
+                //set the onlongclicklistener to delete
+                cloneDraggedView.setOnLongClickListener(this);
 
-                //cloneDraggedView.setImageBitmap(bitmap);
                 Log.d("clone","Complete");
 
-                LinearLayout storyboardLinearLayout = (LinearLayout) parentView.findViewById(R.id.storyboardContainer);
-                LinearLayout patternLinearLayout = (LinearLayout) parentView.findViewById(R.id.patternContainer);
-                RelativeLayout slot1 = (RelativeLayout) parentView.findViewById(R.id.slot1);
-                RelativeLayout slot2 = (RelativeLayout) parentView.findViewById(R.id.slot2);
-                RelativeLayout slot3 = (RelativeLayout) parentView.findViewById(R.id.slot3);
-                RelativeLayout slot4 = (RelativeLayout) parentView.findViewById(R.id.slot4);
-                RelativeLayout slot5 = (RelativeLayout) parentView.findViewById(R.id.slot5);
-                RelativeLayout slot6 = (RelativeLayout) parentView.findViewById(R.id.slot6);
-
-
-                //ViewGroup draggedImageViewParentLayout = (ViewGroup) draggedView.getParent();
-                switch (view.getId()) {
-                    /*
-                    case R.id.storyboardContainer:
-                        Log.d("Container", "storyboard");
-                        //draggedImageViewParentLayout = (ViewGroup) draggedView.getParent();
-                        //draggedImageViewParentLayout.removeView(draggedCopy);
-                        storyboardLinearLayout.addView(cloneDraggedView);
-
-                        return true;
-                        */
-                    case R.id.slot1:
-                        slot1.removeAllViews();
-                        slot1.addView(cloneDraggedView);
-                        return true;
-                    case R.id.slot2:
-                        slot2.removeAllViews();
-                        slot2.addView(cloneDraggedView);
-                        return true;
-                    case R.id.slot3:
-                        slot3.removeAllViews();
-                        slot3.addView(cloneDraggedView);
-                        return true;
-                    case R.id.slot4:
-                        slot4.removeAllViews();
-                        slot4.addView(cloneDraggedView);
-                        return true;
-                    case R.id.slot5:
-                        slot5.removeAllViews();
-                        slot5.addView(cloneDraggedView);
-                        return true;
-                    case R.id.slot6:
-                        slot6.removeAllViews();
-                        slot6.addView(cloneDraggedView);
-                        return true;
-                    case R.id.patternContainer:
-                        Log.d("Container", "pattern");
-                        //draggedImageViewParentLayout = (ViewGroup) draggedView.getParent();
-                        return true;
-                    case R.id.projectBackground:
-                        Log.d("Container", "background");
-                        return true;
+                if(oldDraggedView.getParent() != patternLinearLayout){
+                    //offer to delete or to copy to new slot.
+                    
+                } else {
+                    switch (view.getId()) {
+                        case R.id.slot1:
+                            slot1.removeAllViews();
+                            slot1.addView(cloneDraggedView);
+                            return true;
+                        case R.id.slot2:
+                            slot2.removeAllViews();
+                            slot2.addView(cloneDraggedView);
+                            return true;
+                        case R.id.slot3:
+                            slot3.removeAllViews();
+                            slot3.addView(cloneDraggedView);
+                            return true;
+                        case R.id.slot4:
+                            slot4.removeAllViews();
+                            slot4.addView(cloneDraggedView);
+                            return true;
+                        case R.id.slot5:
+                            slot5.removeAllViews();
+                            slot5.addView(cloneDraggedView);
+                            return true;
+                        case R.id.slot6:
+                            slot6.removeAllViews();
+                            slot6.addView(cloneDraggedView);
+                            return true;
+                    }
                 }
         }
         return true;
@@ -268,7 +239,10 @@ public class ProjectsFragment extends Fragment implements
         * metadata for this data and callback for drawing shadow.*/
         //view.startDrag(clipData, shadowBuilder, (ImageView) view, 0);
         view.startDragAndDrop(clipData, shadowBuilder, (GifImageView) view, 0);
-        //view.setVisibility(View.INVISIBLE);
+
+        if(view.getParent() != patternLinearLayout) {
+            view.setVisibility(View.INVISIBLE);
+        }
 
         return true;
     }
