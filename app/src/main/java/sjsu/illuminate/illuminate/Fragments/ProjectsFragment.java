@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,9 +44,16 @@ import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
  * create an instance of this fragment.
  */
 public class ProjectsFragment extends Fragment implements
-        View.OnDragListener, View.OnLongClickListener{
+        View.OnDragListener, View.OnLongClickListener, OnClickListener{
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    public enum gifColor{
+        PINK, RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE
+    }
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -93,20 +101,29 @@ public class ProjectsFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Get view
-        Log.d("onCreateView", "set view");
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
 
+        defineLayouts(view);
+        setListeners(view);
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void defineLayouts(View view){
+
         //Create LinearLayout
-        Log.d("onCreateView", "pattern layout");
         patternLinearLayout = (LinearLayout) view.findViewById(R.id.patternContainer);
+        //define slots
         slot1 = (RelativeLayout) view.findViewById(R.id.slot1);
         slot2 = (RelativeLayout) view.findViewById(R.id.slot2);
         slot3 = (RelativeLayout) view.findViewById(R.id.slot3);
         slot4 = (RelativeLayout) view.findViewById(R.id.slot4);
         slot5 = (RelativeLayout) view.findViewById(R.id.slot5);
         slot6 = (RelativeLayout) view.findViewById(R.id.slot6);
+    }
 
-        Log.d("layoutparams", view.findViewById(R.id.fadeOff).getLayoutParams().toString());
+    private void setListeners(View view){
 
         //Add GIF Drawables to LinearLayout
         view.findViewById(R.id.fadeOff).setOnLongClickListener(this);
@@ -114,6 +131,8 @@ public class ProjectsFragment extends Fragment implements
         view.findViewById(R.id.spiralUp).setOnLongClickListener(this);
         view.findViewById(R.id.spiralDown).setOnLongClickListener(this);
         view.findViewById(R.id.flash).setOnLongClickListener(this);
+
+        //Set patternContainer listener and Slot listeners
         view.findViewById(R.id.patternContainer).setOnDragListener(this);
         view.findViewById(R.id.slot1).setOnDragListener(this);
         view.findViewById(R.id.slot2).setOnDragListener(this);
@@ -123,8 +142,25 @@ public class ProjectsFragment extends Fragment implements
         view.findViewById(R.id.slot6).setOnDragListener(this);
         view.findViewById(R.id.projectBackground).setOnDragListener(this);
 
-        // Inflate the layout for this fragment
-        return view;
+        //Set color palette listeners
+        view.findViewById(R.id.pinkButton).setOnClickListener(this);
+        view.findViewById(R.id.redButton).setOnClickListener(this);
+        view.findViewById(R.id.orangeButton).setOnClickListener(this);
+        view.findViewById(R.id.yellowButton).setOnClickListener(this);
+        view.findViewById(R.id.greenButton).setOnClickListener(this);
+        view.findViewById(R.id.blueButton).setOnClickListener(this);
+        view.findViewById(R.id.purpleButton).setOnClickListener(this);
+    }
+
+    public void setGifColor(View v){
+        //Change all icons
+        /*
+        getView().findViewById(R.id.fadeOff).setBackground(getResources().getDrawable(R.drawable.fadeoffgreen));
+        getView().findViewById(R.id.fadeOn).setBackground(getResources().getDrawable(R.drawable.fadeongreen));
+        getView().findViewById(R.id.spiralDown).setBackground(getResources().getDrawable(R.drawable.spiraldowngreen));
+        getView().findViewById(R.id.spiralUp).setBackground(getResources().getDrawable(R.drawable.spiralupgreen));
+        getView().findViewById(R.id.flash).setBackground(getResources().getDrawable(R.drawable.flashgreen));
+        */
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -183,6 +219,7 @@ public class ProjectsFragment extends Fragment implements
                 GifImageView cloneDraggedView = new GifImageView(getContext());
                 //set the copy background
                 cloneDraggedView.setBackground(oldDraggedView.getBackground());
+                Log.d("old background", oldDraggedView.getBackground().toString());
                 //set the copy layoutparams
                 cloneDraggedView.setLayoutParams(oldDraggedView.getLayoutParams());
                 //set the onlongclicklistener to delete
@@ -192,7 +229,7 @@ public class ProjectsFragment extends Fragment implements
 
                 if(oldDraggedView.getParent() != patternLinearLayout){
                     //offer to delete or to copy to new slot.
-                    
+
                 } else {
                     switch (view.getId()) {
                         case R.id.slot1:
@@ -223,6 +260,33 @@ public class ProjectsFragment extends Fragment implements
                 }
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.pinkButton:
+                setGifColor(view);
+                break;
+            case R.id.redButton:
+                setGifColor(view);
+                break;
+            case R.id.orangeButton:
+                setGifColor(view);
+                break;
+            case R.id.yellowButton:
+                setGifColor(view);
+                break;
+            case R.id.greenButton:
+                setGifColor(view);
+                break;
+            case R.id.blueButton:
+                setGifColor(view);
+                break;
+            case R.id.purpleButton:
+                setGifColor(view);
+                break;
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.N)
