@@ -1,6 +1,7 @@
 package sjsu.illuminate.illuminate.Fragments;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import sjsu.illuminate.illuminate.Activities.MainActivity;
 import sjsu.illuminate.illuminate.R;
@@ -70,10 +72,21 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_homepage, container, false);
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/Frontage-Regular.otf");
+
+
+        TextView appName = (TextView) view.findViewById(R.id.illuminateHomepage);
         projectsButton = (Button) view.findViewById(R.id.projectsButton);
         howToButton = (Button) view.findViewById(R.id.howToButton);
         submissionsButton = (Button) view.findViewById(R.id.submissionsButton);
         aboutUsButton = (Button) view.findViewById(R.id.aboutUsButton);
+
+        //set font
+        appName.setTypeface(typeface);
+        projectsButton.setTypeface(typeface);
+        howToButton.setTypeface(typeface);
+        submissionsButton.setTypeface(typeface);
+        aboutUsButton.setTypeface(typeface);
 
         projectsButton.setOnClickListener(this);
         howToButton.setOnClickListener(this);

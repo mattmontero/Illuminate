@@ -1,9 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/projectBackground"
+    android:orientation="vertical"
     tools:context="sjsu.illuminate.illuminate.Fragments.ProjectsFragment">
 
 
@@ -11,13 +12,16 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:gravity="left"
         android:orientation="horizontal"
         android:id="@+id/storyboardContainer"
-        android:background="@color/colorAccent"
         android:weightSum="6"
-        android:padding="10dp"
+
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -75,19 +79,76 @@
             android:id="@+id/slot6"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="75dp"
+        android:weightSum="7"
+        android:id="@+id/colorPalette"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/pinkButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminatePink"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/redButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminateRed"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/orangeButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminateOrange"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/yellowButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminateYellow"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/greenButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminateGreen"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/blueButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminateBlue"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/purpleButton"
+            android:layout_weight="1"
+            android:background="@drawable/background"
+            android:backgroundTint="@color/illuminatePurple"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:id="@+id/patternContainer"
-        android:background="@color/colorAccent"
         android:weightSum="5"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -96,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/spiralup"
+            android:background="@drawable/spiralupblue"
             android:foreground="@drawable/patterniconboarder"
             android:id="@+id/spiralUp"
             android:layout_margin="10dp" />
@@ -105,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/spiraldown"
+            android:background="@drawable/spiraldownblue"
             android:foreground="@drawable/patterniconboarder"
             android:id="@+id/spiralDown"
             android:layout_margin="10dp" />
@@ -114,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/fadeoff"
+            android:background="@drawable/fadeoffblue"
             android:foreground="@drawable/patterniconboarder"
             android:id="@+id/fadeOff"
             android:layout_margin="10dp" />
@@ -123,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/fadeon"
+            android:background="@drawable/fadeonblue"
             android:foreground="@drawable/patterniconboarder"
             android:id="@+id/fadeOn"
             android:layout_margin="10dp" />
@@ -132,12 +193,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/flash"
+            android:background="@drawable/flashblue"
             android:foreground="@drawable/patterniconboarder"
             android:id="@+id/flash"
             android:layout_margin="10dp" />
 
     </LinearLayout>
 
-
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -3,5 +3,11 @@
     <color name="colorPrimary">#263238</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="blue">#0000ff</color>
+    <color name="illuminatePurple">#785BAB</color>
+    <color name="illuminateBlue">#35BAD3</color>
+    <color name="illuminateGreen">#A4D543</color>
+    <color name="illuminateYellow">#F8E349</color>
+    <color name="illuminateOrange">#F47328</color>
+    <color name="illuminateRed">#E2062A</color>
+    <color name="illuminatePink">#F84492</color>
 </resources>

@@ -29,9 +29,7 @@
             android:text="@string/app_name"
             android:paddingBottom="16dp"
             android:id="@+id/illuminateHomepage"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:fontFamily="sans-serif"
-            android:textSize="80sp" />
+            android:textSize="30sp" />
 
         <Button
             android:text="Projects"
@@ -39,7 +37,7 @@
             android:layout_width="225dp"
             android:id="@+id/projectsButton"
             android:background="@drawable/menu_buttons"
-            android:backgroundTint="#44b9d6"
+            android:backgroundTint="@color/illuminateBlue"
             android:layout_margin="4dp"
             android:padding="0dp"/>
         <Button
@@ -48,7 +46,7 @@
             android:layout_width="225dp"
             android:id="@+id/howToButton"
             android:background="@drawable/menu_buttons"
-            android:backgroundTint="#aad600"
+            android:backgroundTint="@color/illuminateGreen"
             android:layout_margin="4dp"
             android:padding="0dp"/>
         <Button
@@ -57,7 +55,7 @@
             android:layout_width="225dp"
             android:id="@+id/submissionsButton"
             android:background="@drawable/menu_buttons"
-            android:backgroundTint="#ef7500"
+            android:backgroundTint="@color/illuminateOrange"
             android:layout_margin="4dp"
             android:padding="0dp"/>
         <Button
@@ -66,7 +64,7 @@
             android:layout_width="225dp"
             android:id="@+id/aboutUsButton"
             android:background="@drawable/menu_buttons"
-            android:backgroundTint="#765aaf"
+            android:backgroundTint="@color/illuminatePurple"
             android:layout_margin="4dp"
             android:textAlignment="center"
             android:textIsSelectable="?android:attr/windowActionBar"
