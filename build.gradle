@@ -3,6 +3,9 @@
 buildscript {
     repositories {
         jcenter()
+        /*
+            marvenCentral() //jcenter() works as well because it pulls from Marven Central
+         */
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
