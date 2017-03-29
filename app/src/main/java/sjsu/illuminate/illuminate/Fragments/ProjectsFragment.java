@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +35,7 @@ import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import pl.droidsonroids.gif.GifTextView;
 import pl.droidsonroids.gif.GifTextureView;
+import sjsu.illuminate.illuminate.GifIcon;
 import sjsu.illuminate.illuminate.R;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
@@ -51,6 +53,10 @@ public class ProjectsFragment extends Fragment implements
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    private enum gifImage {
+
+    }
 
     final private int PINK = 1;
     final private int RED = 2;
@@ -110,7 +116,7 @@ public class ProjectsFragment extends Fragment implements
                              Bundle savedInstanceState) {
         //Get view
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
-
+        Log.d("View", view.toString());
         defineLayouts(view);
         defineGIFs(view, PINK);
         setListeners(view);
@@ -124,156 +130,39 @@ public class ProjectsFragment extends Fragment implements
         GlideDrawableImageViewTarget fadeOnTarget;
         GlideDrawableImageViewTarget fadeOffTarget;
         GlideDrawableImageViewTarget flashTarget;
-        switch (color){
-            case PINK:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownpink).into(spiralDownTarget);
 
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiraluppink).into(spiralUpTarget);
+        GifIcon icons = new GifIcon(color);
 
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonpink).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffpink).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashpink).into(flashTarget);
-                break;
-            case RED:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownred).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiralupred).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonredd).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffred).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashred).into(flashTarget);
-                break;
-            case ORANGE:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownorange).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiraluporange).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonorange).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeofforange).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashorange).into(flashTarget);
-                break;
-            case YELLOW:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownyellow).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiralupyellow).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonyellow).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffyellow).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashyellow).into(flashTarget);
-                break;
-            case GREEN:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldowngreen).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiralupgreen).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeongreen).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffgreen).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashgreen).into(flashTarget);
-                break;
-            case BLUE:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownblue).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiralupblue).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonblue).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffblue).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashblue).into(flashTarget);
-                break;
-            case PURPLE:
-                spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
-                spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
-                Glide.with(this).load(R.drawable.spiraldownpurple).into(spiralDownTarget);
-
-                spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
-                spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
-                Glide.with(this).load(R.drawable.spiraluppurple).into(spiralUpTarget);
-
-                fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
-                fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
-                Glide.with(this).load(R.drawable.fadeonpurple).into(fadeOnTarget);
-
-                fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
-                fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
-                Glide.with(this).load(R.drawable.fadeoffpurple).into(fadeOffTarget);
-
-                flash = (ImageView) view.findViewById(R.id.flash);
-                flashTarget = new GlideDrawableImageViewTarget(flash);
-                Glide.with(this).load(R.drawable.flashpurple).into(flashTarget);
-                break;
+        for(int i = 0; i < icons.getIcons().length; i++)
+        {
+            switch (i){
+                case 0:
+                    spiralDown = (ImageView) view.findViewById(R.id.spiralDown);
+                    spiralDownTarget = new GlideDrawableImageViewTarget(spiralDown);
+                    Glide.with(this).load(icons.getIcons()[i]).into(spiralDownTarget);
+                    break;
+                case 1:
+                    spiralUp = (ImageView) view.findViewById(R.id.spiralUp);
+                    spiralUpTarget = new GlideDrawableImageViewTarget(spiralUp);
+                    Glide.with(this).load(icons.getIcons()[i]).into(spiralUpTarget);
+                    break;
+                case 2:
+                    fadeOn = (ImageView) view.findViewById(R.id.fadeOn);
+                    fadeOnTarget = new GlideDrawableImageViewTarget(fadeOn);
+                    Glide.with(this).load(icons.getIcons()[i]).into(fadeOnTarget);
+                    break;
+                case 3:
+                    fadeOff = (ImageView) view.findViewById(R.id.fadeOff);
+                    fadeOffTarget = new GlideDrawableImageViewTarget(fadeOff);
+                    Glide.with(this).load(icons.getIcons()[i]).into(fadeOffTarget);
+                    break;
+                case 4:
+                    flash = (ImageView) view.findViewById(R.id.flash);
+                    flashTarget = new GlideDrawableImageViewTarget(flash);
+                    Glide.with(this).load(icons.getIcons()[i]).into(flashTarget);
+                    break;
+            }
         }
-
     }
     private void defineLayouts(View view){
 
@@ -315,17 +204,6 @@ public class ProjectsFragment extends Fragment implements
         view.findViewById(R.id.greenButton).setOnClickListener(this);
         view.findViewById(R.id.blueButton).setOnClickListener(this);
         view.findViewById(R.id.purpleButton).setOnClickListener(this);
-    }
-
-    public void setGifColor(View v){
-        //Change all icons
-        /*
-        getView().findViewById(R.id.fadeOff).setBackground(getResources().getDrawable(R.drawable.fadeoffgreen));
-        getView().findViewById(R.id.fadeOn).setBackground(getResources().getDrawable(R.drawable.fadeongreen));
-        getView().findViewById(R.id.spiralDown).setBackground(getResources().getDrawable(R.drawable.spiraldowngreen));
-        getView().findViewById(R.id.spiralUp).setBackground(getResources().getDrawable(R.drawable.spiralupgreen));
-        getView().findViewById(R.id.flash).setBackground(getResources().getDrawable(R.drawable.flashgreen));
-        */
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -402,30 +280,44 @@ public class ProjectsFragment extends Fragment implements
                     //offer to delete or to copy to new slot.
 
                 } else {
+                    GlideDrawableImageViewTarget gifTarget;
                     switch (view.getId()) {
                         case R.id.slot1:
                             slot1.removeAllViews();
                             slot1.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            //FINAL INT COLOR = R.drawable.gifName
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                         case R.id.slot2:
                             slot2.removeAllViews();
                             slot2.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                         case R.id.slot3:
                             slot3.removeAllViews();
                             slot3.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                         case R.id.slot4:
                             slot4.removeAllViews();
                             slot4.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                         case R.id.slot5:
                             slot5.removeAllViews();
                             slot5.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                         case R.id.slot6:
                             slot6.removeAllViews();
                             slot6.addView(cloneDraggedView);
+                            gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
+                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
                             return true;
                     }
                 }
@@ -437,25 +329,25 @@ public class ProjectsFragment extends Fragment implements
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.pinkButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), PINK);
                 break;
             case R.id.redButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), RED);
                 break;
             case R.id.orangeButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), ORANGE);
                 break;
             case R.id.yellowButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), YELLOW);
                 break;
             case R.id.greenButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), GREEN);
                 break;
             case R.id.blueButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), BLUE);
                 break;
             case R.id.purpleButton:
-                setGifColor(view);
+                defineGIFs(getActivity().findViewById(R.id.projectBackground), PURPLE);
                 break;
         }
     }

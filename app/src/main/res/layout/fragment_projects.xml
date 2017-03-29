@@ -12,70 +12,71 @@
     <!-- TODO: Update blank fragment layout  -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="left"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         android:id="@+id/storyboardContainer"
-        android:weightSum="6"
 
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="75dp"
+        android:paddingBottom="75dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+        <!--
+        <GridView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:numColumns="6">
+        </GridView>
+        -->
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot1"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot2"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot3"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot4"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot5"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="50dp"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:layout_weight="1"
             android:id="@+id/slot6"
             android:background="@drawable/patterniconboarder">
         </RelativeLayout>
@@ -86,6 +87,7 @@
         android:layout_height="75dp"
         android:weightSum="7"
         android:id="@+id/colorPalette"
+        android:layout_marginBottom="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:orientation="horizontal">
@@ -242,7 +244,17 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE"
+            android:backgroundTint="@color/illuminateGreen"/>
+
+    </LinearLayout>
+
 </LinearLayout>
