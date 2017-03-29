@@ -165,7 +165,6 @@ public class ProjectsFragment extends Fragment implements
         }
     }
     private void defineLayouts(View view){
-
         //Create LinearLayout
         patternLinearLayout = (LinearLayout) view.findViewById(R.id.patternContainer);
         //define slots
@@ -286,38 +285,37 @@ public class ProjectsFragment extends Fragment implements
                             slot1.removeAllViews();
                             slot1.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            //FINAL INT COLOR = R.drawable.gifName
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                         case R.id.slot2:
                             slot2.removeAllViews();
                             slot2.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                         case R.id.slot3:
                             slot3.removeAllViews();
                             slot3.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                         case R.id.slot4:
                             slot4.removeAllViews();
                             slot4.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                         case R.id.slot5:
                             slot5.removeAllViews();
                             slot5.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                         case R.id.slot6:
                             slot6.removeAllViews();
                             slot6.addView(cloneDraggedView);
                             gifTarget = new GlideDrawableImageViewTarget(cloneDraggedView);
-                            Glide.with(this).load(R.drawable.blinkblu5050).into(gifTarget);
+                            Glide.with(this).load(R.drawable.flashblue).into(gifTarget);
                             return true;
                     }
                 }
@@ -361,11 +359,11 @@ public class ProjectsFragment extends Fragment implements
         // Create clip data holding the data of the MIMETYPE TEXT_PLAIN
         ClipData clipData = ClipData.newPlainText("","");
 
-        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder((ImageView) view);
+        View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
         /*Start the drag - Contains the data to be dragged,
         * metadata for this data and callback for drawing shadow.*/
         //view.startDrag(clipData, shadowBuilder, (ImageView) view, 0);
-        view.startDragAndDrop(clipData, shadowBuilder, (ImageView) view, 0);
+        view.startDragAndDrop(clipData, shadowBuilder, view, 0);
 
         if(view.getParent() != patternLinearLayout) {
             view.setVisibility(View.INVISIBLE);
