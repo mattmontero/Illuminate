@@ -8,6 +8,13 @@
     tools:context="sjsu.illuminate.illuminate.Fragments.ProjectsFragment">
 
 
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="1"
+        android:columnCount="6">
+
+    </GridLayout>
 
     <!-- TODO: Update blank fragment layout  -->
     <LinearLayout
@@ -24,14 +31,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
-        <!--
-        <GridView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:columnWidth="50dp"
-            android:numColumns="6">
-        </GridView>
-        -->
 
         <RelativeLayout
             android:layout_width="50dp"
@@ -252,8 +251,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CREATE"
-            android:backgroundTint="@color/illuminateGreen"/>
+            android:id="@+id/createButton"
+            android:text="CREATE"/>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="30dp"
+            android:id="@+id/trashbin"
+            android:background="@drawable/trashbin"/>
 
     </LinearLayout>
 
