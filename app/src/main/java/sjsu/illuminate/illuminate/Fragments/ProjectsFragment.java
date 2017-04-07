@@ -19,6 +19,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
@@ -37,6 +39,7 @@ import pl.droidsonroids.gif.GifImageView;
 import pl.droidsonroids.gif.GifTextView;
 import pl.droidsonroids.gif.GifTextureView;
 import sjsu.illuminate.illuminate.GifIcon;
+import sjsu.illuminate.illuminate.NfcMessage;
 import sjsu.illuminate.illuminate.R;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
@@ -117,6 +120,7 @@ public class ProjectsFragment extends Fragment implements
         //Get view
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         timelineDrawableID = new int[]{0,0,0,0,0,0};
+        updateCreateButton((Button) view.findViewById(R.id.createButton));
         Log.d("View", view.toString());
         defineLayouts(view);
         defineGIFs(view, PINK);
@@ -324,15 +328,16 @@ public class ProjectsFragment extends Fragment implements
                     }
                     Glide.with(this).load(rDrawableIcon).into(gifTarget);
                 } else {
-                    rDrawableIcon = timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())];
+                    int slotPosition = getSlotPosition((RelativeLayout) oldDraggedView.getParent());
+                    rDrawableIcon = timelineDrawableID[slotPosition];
                     //offer to delete or to copy to new slot.
                    switch (view.getId()){
                         case R.id.slot1:
                             removeAllViews((RelativeLayout) oldDraggedView.getParent());
                             slot1.removeAllViews();
-                            //slot1.addView(cloneDraggedView);
+                            slot1.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(0, rDrawableIcon);
                             break;
                         case R.id.slot2:
@@ -340,7 +345,7 @@ public class ProjectsFragment extends Fragment implements
                             slot2.removeAllViews();
                             slot2.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(1, rDrawableIcon);
                             break;
                         case R.id.slot3:
@@ -348,7 +353,7 @@ public class ProjectsFragment extends Fragment implements
                             slot3.removeAllViews();
                             slot3.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(2, rDrawableIcon);
                             break;
                         case R.id.slot4:
@@ -356,7 +361,7 @@ public class ProjectsFragment extends Fragment implements
                             slot4.removeAllViews();
                             slot4.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(3, rDrawableIcon);
                             break;
                         case R.id.slot5:
@@ -364,7 +369,7 @@ public class ProjectsFragment extends Fragment implements
                             slot5.removeAllViews();
                             slot5.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(4, rDrawableIcon);
                             break;
                         case R.id.slot6:
@@ -372,17 +377,17 @@ public class ProjectsFragment extends Fragment implements
                             slot6.removeAllViews();
                             slot6.addView(cloneDraggedView);
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             addToTimeline(5, rDrawableIcon);
                             break;
                         case R.id.trashbin:
                             //timelineDrawableID[getSlotPosition((RelativeLayout) oldDraggedView.getParent())] = 0;
-                            removeFromTimeline(getSlotPosition((RelativeLayout) oldDraggedView.getParent()));
+                            removeFromTimeline(slotPosition);
                             removeAllViews((RelativeLayout) oldDraggedView.getParent());
                             //oldDraggedView.getParent().removeAllViews();
                             //oldDraggedView.delete();
+                            break;
                         default:
-
                             break;
                     }
                     Glide.with(this).load(rDrawableIcon).into(gifTarget);
@@ -430,17 +435,23 @@ public class ProjectsFragment extends Fragment implements
             if(timelineDrawableID[i] == 0)
             {
                 Log.d("CreateButton", "Timeline is not full");
-                createButton.setBackgroundColor(Color.BLUE);
-                //createButton.setHighlightColor(Color.BLUE);
+                createButton.setBackgroundColor(Color.DKGRAY);
                 createButton.setClickable(false);
                 return;
             }
         }
         Log.d("CreateButton", "Timeline is full");
         createButton.setBackgroundColor(getResources().getColor(R.color.illuminateGreen));
-        //createButton.setHighlightColor(Color.GREEN);
         createButton.setClickable(true);
 
+    }
+
+    private void createNfcMessage(View v){
+        PopupMenu popup = new PopupMenu(getContext(), v);
+        MenuInflater inflater = popup.getMenuInflater();
+        //inflater.inflate(R.menu.actions, popup.getMenu());
+        NfcMessage nfcMessage = new NfcMessage(timelineDrawableID);
+        Log.d("NFC Message", nfcMessage.getMessage());
     }
 
     private int getDrawableIconId(int imageViewId){
