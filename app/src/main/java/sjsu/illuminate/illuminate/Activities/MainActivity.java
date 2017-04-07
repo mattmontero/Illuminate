@@ -1,13 +1,12 @@
 package sjsu.illuminate.illuminate.Activities;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import sjsu.illuminate.illuminate.Fragments.AboutUsFragment;
+import sjsu.illuminate.illuminate.Fragments.LearnMoreFragment;
 import sjsu.illuminate.illuminate.Fragments.HomepageFragment;
 import sjsu.illuminate.illuminate.Fragments.HowToFragment;
 import sjsu.illuminate.illuminate.Fragments.MainFragment;
@@ -17,8 +16,10 @@ import sjsu.illuminate.illuminate.R;
 
 public class MainActivity extends AppCompatActivity
         implements MainFragment.MainFragmentInteractionListener, HomepageFragment.HomepageFragmentInteractionListener,
-        ProjectsFragment.ProjectsFragmentInteractionListener, AboutUsFragment.AboutUsFragmentInteractionListener,
-        SubmissionsFragment.SubmissionsFragmentInteractionListener, HowToFragment.HowToFragmentInteractionListener{
+        ProjectsFragment.ProjectsFragmentInteractionListener, LearnMoreFragment.LearnMoreFragmentInteractionListener,
+        SubmissionsFragment.SubmissionsFragmentInteractionListener, HowToFragment.HowToFragmentInteractionListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
     //Loads SubmissionPage
     public void loadAboutUs(){
-        AboutUsFragment aboutUsFragment = new AboutUsFragment();
+        LearnMoreFragment aboutUsFragment = new LearnMoreFragment();
         this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutUsFragment).addToBackStack(null).commit();
     }
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onAboutUsFragmentInteraction(Uri uri) {
+    public void onLearnMoreFragmentInteraction(Uri uri) {
 
     }
 

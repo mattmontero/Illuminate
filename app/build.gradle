@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        multiDexEnabled true
+        multiDexEnabled true;
         applicationId "sjsu.illuminate.illuminate"
         minSdkVersion 16
         targetSdkVersion 25
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:multidex:1.0.1'
+
 
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:25.3.0'

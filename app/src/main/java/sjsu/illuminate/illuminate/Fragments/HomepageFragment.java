@@ -79,7 +79,7 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
         projectsButton = (Button) view.findViewById(R.id.projectsButton);
         howToButton = (Button) view.findViewById(R.id.howToButton);
         submissionsButton = (Button) view.findViewById(R.id.submissionsButton);
-        aboutUsButton = (Button) view.findViewById(R.id.aboutUsButton);
+        aboutUsButton = (Button) view.findViewById(R.id.learnMoreButton);
 
         //set font
         appName.setTypeface(typeface);
@@ -134,7 +134,7 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
             case R.id.submissionsButton:
                 mainActivity.loadSubmissions();
                 break;
-            case R.id.aboutUsButton:
+            case R.id.learnMoreButton:
                 mainActivity.loadAboutUs();
                 break;
 
