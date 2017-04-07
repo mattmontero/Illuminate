@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
@@ -185,6 +187,7 @@ public class ProjectsFragment extends Fragment implements
     }
 
     private void setListeners(View view){
+        view.findViewById(R.id.createButton).setOnClickListener(this);
 
         //Add GIF Drawables to LinearLayout
         fadeOff.setOnLongClickListener(this);
@@ -255,10 +258,7 @@ public class ProjectsFragment extends Fragment implements
                 //Log.d("DragEvent", "ACTION_DRAG_STARTED");
 
                 //Determine if this View can accept the dragged data
-                if(dragEvent.getClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)) {
-                    return true;
-                }
-                return false;
+                return dragEvent.getClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN);
             case DragEvent.ACTION_DROP:
                 Log.d("ACTION_DROP", "Dropped");
                 //View parentView = (View) view.getParent();
@@ -443,13 +443,12 @@ public class ProjectsFragment extends Fragment implements
         Log.d("CreateButton", "Timeline is full");
         createButton.setBackgroundColor(getResources().getColor(R.color.illuminateGreen));
         createButton.setClickable(true);
-
     }
 
-    private void createNfcMessage(View v){
-        PopupMenu popup = new PopupMenu(getContext(), v);
-        MenuInflater inflater = popup.getMenuInflater();
-        //inflater.inflate(R.menu.actions, popup.getMenu());
+    private void createNfcMessage(){
+        PopupWindow popupWindow = new PopupWindow(200, 500);
+        popupWindow.setTouchable(true);
+
         NfcMessage nfcMessage = new NfcMessage(timelineDrawableID);
         Log.d("NFC Message", nfcMessage.getMessage());
     }
@@ -502,7 +501,8 @@ public class ProjectsFragment extends Fragment implements
             case R.id.purpleButton:
                 defineGIFs(getActivity().findViewById(R.id.projectBackground), PURPLE);
                 break;
-
+            case R.id.createButton:
+                createNfcMessage();
         }
     }
 

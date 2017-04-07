@@ -18,7 +18,7 @@ public class NfcMessage {
     public String getMessage() {
         String returnString = "";
         for(int i = 0; i < timeline.length; i++){
-            returnString += Integer.toString(timeline[i]);
+            returnString += Integer.toString(timeline[i]) + "\n";
         }
         return returnString;
     }

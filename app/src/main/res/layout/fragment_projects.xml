@@ -193,54 +193,6 @@
             android:id="@+id/flash"
             android:layout_margin="10dp" />
 
-        <!--
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/spiralupblue"
-            android:foreground="@drawable/patterniconboarder"
-            android:id="@+id/spiralUp"
-            android:layout_margin="10dp" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/spiraldownblue"
-            android:foreground="@drawable/patterniconboarder"
-            android:id="@+id/spiralDown"
-            android:layout_margin="10dp" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/fadeoffblue"
-            android:foreground="@drawable/patterniconboarder"
-            android:id="@+id/fadeOff"
-            android:layout_margin="10dp" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/fadeonblue"
-            android:foreground="@drawable/patterniconboarder"
-            android:id="@+id/fadeOn"
-            android:layout_margin="10dp" />
-
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/flashblue"
-            android:foreground="@drawable/patterniconboarder"
-            android:id="@+id/flash"
-            android:layout_margin="10dp" />
-
-            -->
-
     </LinearLayout>
 
     <LinearLayout
