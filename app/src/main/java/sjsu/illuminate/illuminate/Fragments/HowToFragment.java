@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 
 import sjsu.illuminate.illuminate.R;
 
@@ -18,7 +23,7 @@ import sjsu.illuminate.illuminate.R;
  * Use the {@link HowToFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HowToFragment extends Fragment {
+public class HowToFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +34,9 @@ public class HowToFragment extends Fragment {
     private String mParam2;
 
     private HowToFragmentInteractionListener mListener;
+
+    GlideDrawableImageViewTarget gifTarget;
+    int step = 0;
 
     public HowToFragment() {
         // Required empty public constructor
@@ -64,8 +72,13 @@ public class HowToFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_how_to, container, false);
+        view.findViewById(R.id.stepImage).setOnClickListener(this);
+
+        gifTarget = new GlideDrawableImageViewTarget((ImageView) view.findViewById(R.id.stepImage));
+        Glide.with(this).load(R.drawable.stepzero).into(gifTarget);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_to, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +103,42 @@ public class HowToFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        View parent = (View) view.getParent();
+
+        switch (view.getId()){
+            case R.id.stepImage:
+                switch (step){
+                case 0:
+                    Glide.with(this).load(R.drawable.stepone).into(gifTarget);
+                    step++;
+                    break;
+                case 1:
+                    Glide.with(this).load(R.drawable.steptwo).into(gifTarget);
+                    step++;
+                    break;
+                case 2:
+                    Glide.with(this).load(R.drawable.stepthree).into(gifTarget);
+                    step++;
+                    break;
+                case 3:
+                    Glide.with(this).load(R.drawable.stepfour).into(gifTarget);
+                    step++;
+                    break;
+                case 4:
+                    Glide.with(this).load(R.drawable.stepfive).into(gifTarget);
+                    step++;
+                    break;
+                case 5:
+                    Glide.with(this).load(R.drawable.stepsix).into(gifTarget);
+                    step++;
+                    break;
+            }
+                break;
+        }
     }
 
     /**
