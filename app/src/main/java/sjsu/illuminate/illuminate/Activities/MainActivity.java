@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import sjsu.illuminate.illuminate.Fragments.AboutUsFragment;
+import sjsu.illuminate.illuminate.Fragments.LearnDreamFragment;
+import sjsu.illuminate.illuminate.Fragments.LearnHungerFragment;
 import sjsu.illuminate.illuminate.Fragments.LearnMoreFragment;
 import sjsu.illuminate.illuminate.Fragments.HomepageFragment;
 import sjsu.illuminate.illuminate.Fragments.HowToFragment;
@@ -17,7 +20,9 @@ import sjsu.illuminate.illuminate.R;
 public class MainActivity extends AppCompatActivity
         implements MainFragment.MainFragmentInteractionListener, HomepageFragment.HomepageFragmentInteractionListener,
         ProjectsFragment.ProjectsFragmentInteractionListener, LearnMoreFragment.LearnMoreFragmentInteractionListener,
-        SubmissionsFragment.SubmissionsFragmentInteractionListener, HowToFragment.HowToFragmentInteractionListener {
+        SubmissionsFragment.SubmissionsFragmentInteractionListener, HowToFragment.HowToFragmentInteractionListener,
+        LearnDreamFragment.LearnDreamFragmentInteractionListener, LearnHungerFragment.LearnHungerFragmentInteractionListener,
+        AboutUsFragment.AboutUsFragmentInteractionListener{
 
 
 
@@ -58,12 +63,27 @@ public class MainActivity extends AppCompatActivity
         this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, submissionsFragment).addToBackStack(null).commit();
     }
 
-    //Loads SubmissionPage
-    public void loadAboutUs(){
-        LearnMoreFragment aboutUsFragment = new LearnMoreFragment();
-        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutUsFragment).addToBackStack(null).commit();
+    //Loads Learn More page
+    public void loadLearnMore(){
+        LearnMoreFragment learnMoreFragment = new LearnMoreFragment();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, learnMoreFragment).addToBackStack(null).commit();
     }
 
+    //Loads About Us
+    public void loadAboutUs(){
+        AboutUsFragment aboutUsFragment = new AboutUsFragment();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, aboutUsFragment).addToBackStack(null).commit();
+    }
+    //Loads Learn More Hunger page
+    public void loadLearnMoreDream(){
+        LearnDreamFragment learnDreamFragment = new LearnDreamFragment();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, learnDreamFragment).addToBackStack(null).commit();
+    }
+    //Loads Learn More Hunger page
+    public void loadLearnMoreHunger(){
+        LearnHungerFragment learnHungerFragment = new LearnHungerFragment();
+        this.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, learnHungerFragment).addToBackStack(null).commit();
+    }
     @Override
     public void onMainFragmentInteraction(Uri uri) {
 
@@ -91,6 +111,21 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSubmissionsFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onLearnDreamFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onLearnHungerFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onAboutUsFragmentInteraction(Uri uri) {
 
     }
 }

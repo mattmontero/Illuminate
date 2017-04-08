@@ -116,7 +116,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             mListener = (MainFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement LearnDreamFragmentInteractionListener");
         }
     }
 

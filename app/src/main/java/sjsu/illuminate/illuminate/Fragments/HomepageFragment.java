@@ -110,7 +110,7 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
             mListener = (HomepageFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement LearnDreamFragmentInteractionListener");
         }
     }
 
@@ -135,7 +135,7 @@ public class HomepageFragment extends Fragment implements View.OnClickListener {
                 mainActivity.loadSubmissions();
                 break;
             case R.id.learnMoreButton:
-                mainActivity.loadAboutUs();
+                mainActivity.loadLearnMore();
                 break;
 
         }

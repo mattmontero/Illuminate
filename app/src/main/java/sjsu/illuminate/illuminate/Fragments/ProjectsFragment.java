@@ -231,7 +231,7 @@ public class ProjectsFragment extends Fragment implements
             mListener = (ProjectsFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement LearnDreamFragmentInteractionListener");
         }
     }
 
