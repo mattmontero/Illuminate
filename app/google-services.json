@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "619093606350",
+    "project_id": "firebase-illuminate"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619093606350:android:aa8a6f2bc7b3210e",
+        "android_client_info": {
+          "package_name": "sjsu.illuminate.illuminate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619093606350-amvmt9vvetc42qui69gjklbi1vg91pn6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sjsu.illuminate.illuminate",
+            "certificate_hash": "337bc74d4b9bfbe55bef9c1a4f56a5bf3cb624f9"
+          }
+        },
+        {
+          "client_id": "619093606350-8ioa1aq1brbcegk10cp0eoufk6mj5v53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGXnz-EMCtnBgeLCtcE9OpPxOEFsiZjkA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
