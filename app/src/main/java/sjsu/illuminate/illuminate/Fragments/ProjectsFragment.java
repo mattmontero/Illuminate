@@ -1,8 +1,12 @@
 package sjsu.illuminate.illuminate.Fragments;
 
 import android.annotation.TargetApi;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,6 +17,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -35,6 +41,14 @@ import android.widget.Switch;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -68,9 +82,13 @@ public class ProjectsFragment extends Fragment implements
     final private int BLUE = 6;
     final private int PURPLE = 7;
 
+    private BluetoothAdapter mBluetoothAdapter;
+    private ConnectThread mConnectThread;
+    private ConnectedThread mConnectedThread;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Map<Integer, Character> iconToChar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -119,6 +137,8 @@ public class ProjectsFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        createIdToCharMap();
+
         //Get view
         View view = inflater.inflate(R.layout.fragment_projects, container, false);
         timelineDrawableID = new int[]{0,0,0,0,0,0};
@@ -128,9 +148,74 @@ public class ProjectsFragment extends Fragment implements
         defineGIFs(view, PINK);
         setListeners(view);
 
+
+
+        //1. Check if bluetooth is supported
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(mBluetoothAdapter == null){
+            //Device does not support Bluetooth.
+        }
+        //2. Check if bluetooth is enabled
+        if(!mBluetoothAdapter.isEnabled()){
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, 6969);
+        }
+        //3. Get the Bluetooth module device
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        BluetoothDevice mDevice = null;
+        if(pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                if(device.getName().equals("HC-06")) {
+                    mDevice = device;
+                    Log.d("device name", device.getName());
+                    Log.d("device toString", device.toString());
+                    break;
+                }
+            }
+        }
+        //4a. Create the connection thread
+        mConnectThread = new ConnectThread(mDevice);
+        Log.d("ConnectThread", "created");
+        mConnectThread.start();
+        Log.d("ConnectThread", "Running...");
+
+
+
         // Inflate the layout for this fragment
         return view;
     }
+
+    /*
+    int PINK = abcde;
+    int RED = ABCDE;
+    int ORANGE = fghij;
+    int YELLOW = FGHIJ;
+    int GREEN = klmno;
+    int BLUE = KLMNO;
+    int PURPLE = pqrst;
+    */
+    private void createIdToCharMap(){
+        iconToChar = new HashMap<Integer, Character>();
+        char[] charMap = new char[]
+                {'a','b','c','d','e',
+                 'A','B','C','D','E',
+                 'f','g','h','i','j',
+                 'F','G','H','I','J',
+                 'k','l','m','n','o',
+                 'K','L','M','N','O',
+                 'p','q','r','s','t'};
+        int charMapPosition = 0;
+        for(int i = 1; i < 8; i++)
+        {
+            GifIcon gifIcon = new GifIcon(i);
+            for(int j = 0; j < gifIcon.getIcons().length; j++){
+                //Log.d("adding char", Character.toString(charMap[charMapPosition]));
+                iconToChar.put(gifIcon.getIcons()[j], charMap[charMapPosition]);
+                charMapPosition++;
+            }
+        }
+    }
+
     private void defineGIFs(View view, int color){
 
         currentColor = color;
@@ -443,14 +528,40 @@ public class ProjectsFragment extends Fragment implements
         Log.d("CreateButton", "Timeline is full");
         createButton.setBackgroundColor(getResources().getColor(R.color.illuminateGreen));
         createButton.setClickable(true);
+        Log.d("CreateButton", "set to be clickable");
     }
 
     private void createNfcMessage(){
-        PopupWindow popupWindow = new PopupWindow(200, 500);
-        popupWindow.setTouchable(true);
+        //PopupWindow popupWindow = new PopupWindow(200, 500);
+        //popupWindow.setTouchable(true);
+        int firstId = timelineDrawableID[0];
+        int index;
+        for(index = 0; index < timelineDrawableID.length; index++){
+            if (firstId != timelineDrawableID[index]){
+                break;
+            }
+        }
+        if(index == timelineDrawableID.length){
+            try {
+                Log.d("Bluetooth char", "x");
+                mConnectedThread.write("x".getBytes()
+                );
+            } catch (NullPointerException e) {
+                Log.d("Null ConnectedThread", e.toString());
+            }
+        } else {
+            try {
+                for (int i = 0; i < timelineDrawableID.length; i++) {
+                    Log.d("Bluetooth char", Character.toString(iconToChar.get(timelineDrawableID[i])));
+                    mConnectedThread.write((Character.toString((iconToChar.get(timelineDrawableID[i]))).getBytes()));
+                }
+            } catch (NullPointerException e) {
+                Log.d("Null ConnectedThread", e.toString());
+            }
+        }
 
-        NfcMessage nfcMessage = new NfcMessage(timelineDrawableID);
-        Log.d("NFC Message", nfcMessage.getMessage());
+        //NfcMessage nfcMessage = new NfcMessage(timelineDrawableID);
+        //Log.d("NFC Message", nfcMessage.getMessage());
     }
 
     private int getDrawableIconId(int imageViewId){
@@ -538,4 +649,132 @@ public class ProjectsFragment extends Fragment implements
         // TODO: Update argument type and name
         void onProjectsFragmentInteraction(Uri uri);
     }
+
+
+
+
+    /*
+    Bluetooth code begins here
+        ConnectThread
+        ConnectedThread
+        Handler
+     */
+    private class ConnectThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+
+        public ConnectThread(BluetoothDevice device) {
+            BluetoothSocket tmp = null;
+            try {
+                tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+                Log.d("UUID", MY_UUID.toString());
+                Log.d("socket", tmp.toString());
+            } catch (IOException e) {
+                Log.d("temp Socket", e.toString());
+            }
+            mmSocket = tmp;
+        }
+
+        public void run() {
+            mBluetoothAdapter.cancelDiscovery();
+            try {
+                mmSocket.connect();
+            } catch (IOException connectException) {
+                Log.d("Connect Exception", connectException.toString());
+                try {
+                    mmSocket.close();
+                } catch (IOException closeException) {
+                    Log.d("Close Exception", closeException.toString());
+                }
+                return;
+            }
+
+            mConnectedThread = new ConnectedThread(mmSocket);
+            Log.d("ConnectedThread", "created");
+            mConnectedThread.start();
+            Log.d("connectedThread", "Running...");
+        }
+
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {}
+        }
+    }
+
+    private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
+        private final InputStream mmInStream;
+        private final OutputStream mmOutStream;
+
+        public ConnectedThread(BluetoothSocket socket) {
+            mmSocket = socket;
+            InputStream tempIn = null;
+            OutputStream tempOut = null;
+            try {
+                tempIn = socket.getInputStream();
+                tempOut = socket.getOutputStream();
+            } catch (IOException e) { }
+
+            mmInStream = tempIn;
+            mmOutStream = tempOut;
+        }
+
+        public void run() {
+            byte[] buffer = new byte[1024];
+            int begin = 0;
+            int bytes = 0;
+
+            while (true) {
+                try {
+                    Log.d("bytes", "" + bytes);
+                    bytes += mmInStream.read(buffer, bytes, buffer.length - bytes);
+                    for(int i = begin; i < bytes; i++) {
+                        if(buffer[i] == "#".getBytes()[0]) {
+                            Log.d("found #", mHandler.toString());
+                            mHandler.obtainMessage(1, begin, i, buffer).sendToTarget();
+                            begin = i+1;
+                            if(i == bytes -1) {
+                                bytes = 0;
+                                begin = 0;
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    Log.d("something happened", e.toString());
+                    break;
+                }
+            }
+        }
+
+        public void write (byte[] bytes) {
+            try{
+                mmOutStream.write(bytes);
+            } catch (IOException e) {}
+        }
+
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {}
+        }
+    }
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            byte[] writeBuf = (byte[]) msg.obj;
+            int begin = (int) msg.arg1;
+            int end = (int) msg.arg2;
+            Log.d("Handler","message");
+            switch (msg.what) {
+                case 1:
+                    String writeMessage = new String(writeBuf);
+                    writeMessage = writeMessage.substring(begin, end);
+                    Log.d("receiving", writeMessage.toString());
+
+                    break;
+            }
+        }
+    };
+
 }
